@@ -1,23 +1,23 @@
 import smtplib
-from email.mime.text import MIMEText
+from email.message import EmailMessage
+from secrets import sender_email,password
 
 
-sender = "varshakm302@gmail.com"
-receiver = "4mh23cs179@gmail.com"
-password = "dhej otyw hjsw vgrc"
+def send_email(reciever_email: str, subject: str, content: str) -> str:
+    """Send an email to the given receiver email address with the specified subject and content."""
+    msg = EmailMessage()
+    msg["From"] = sender_email
+    msg["To"] = reciever_email
+    msg["Subject"] = subject
+    msg.set_content(content)
 
+    # Connect to Gmail Server
+    with smtplib.SMTP_SSL('smtp.gmail.com',465) as server:
+        server.login(sender_email,password)
+        server.send_message(msg)
 
-msg = MIMEText("Hello! This mail is sent using Python.")
-msg["Subject"] = "Python Email Test"
-msg["From"] = sender
-msg["To"] = receiver
+    print("Email sent successfully")
+    return "Email sent successfully"
 
-# Connect to Gmail Server
-server = smtplib.SMTP("smtp.gmail.com", 587)
-server.starttls()
-server.login(sender, password)
-
-server.sendmail(sender, receiver, msg.as_string())
-server.quit()
-
-print("Email sent successfully")
+if __name__ == "__main__":
+    send_email("4mh23cs179@gmail.com", subject="Hello from python",content="this is a test emailfrom python")

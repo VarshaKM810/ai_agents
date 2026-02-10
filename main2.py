@@ -30,7 +30,7 @@ agent = create_agent(
 
 # Run the agent
 response = agent.invoke(
-    {"messages": [{"role": "user", "content": "what is the weather in mysore and is 2001 prime?"}]}
+    {"messages": [{"role": "user", "content": "what is the weather in mysore and is 2001 prime? send an email to 4mh23cs179@gmail.com with the content about the weather and result of prime"}]}
 )
 
 # Print only the final AI response
